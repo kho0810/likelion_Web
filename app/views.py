@@ -2,21 +2,21 @@ from flask import render_template, Flask, request, redirect
 from app import app
 import urllib2
 from bs4 import BeautifulSoup
-# from flaskext import wtf
-# from Flaskext.wtf import Form, TextField, TextAreaField, \
-#     SubmitField, validators, ValidationError
+from flaskext import wtf
+from flaskext.wtf import Form, TextField, TextAreaField, \
+    SubmitField, validators, ValidationError
 
 
-# class ContactForm(Form):
-#     name = TextField("Name", [validators.Required("Please enter your name.")])
-#     email = TextField(
-#         "Email", [validators.Required("Please enter email address."),
-#                   validators.Email("Please enter valid email address.")])
-#     subject = TextField(
-#         "Subject", [validators.Required("Please enter a subject.")])
-#     message = TextAreaField(
-#         "Message", [validators.Required("Please enter a subject.")])
-#     submit = SubmitField("Send")
+class ContactForm(Form):
+    name = TextField("Name", [validators.Required("Please enter your name.")])
+    email = TextField(
+        "Email", [validators.Required("Please enter email address."),
+                  validators.Email("Please enter valid email address.")])
+    subject = TextField(
+        "Subject", [validators.Required("Please enter a subject.")])
+    message = TextAreaField(
+        "Message", [validators.Required("Please enter a subject.")])
+    submit = SubmitField("Send")
 
 
 @app.route('/')
