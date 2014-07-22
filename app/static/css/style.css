@@ -1,0 +1,100 @@
+h2 {
+	color: blue;
+}
+
+#textDefault:hover {
+	text-decoration: none;
+}
+
+.scroll {
+
+}
+
+.imgs {
+	/*margin-bottom: -40px;*/
+}
+
+.address1 {
+	position: fixed;
+	right: 10px;
+	bottom: 0px;
+	color: white;
+}
+
+.address1 a {
+	color: white;
+}
+
+.home {
+	width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.schedule {
+	background-color: red;
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+.people {
+	background-color: white;
+	text-align: center;
+	margin-top: -20px;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.picture {
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 20px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#nav_bar {
+	background-color: rgba(0,0,0,0.5);
+	border-color: transparent;
+}
+
+#nav_brand {
+	color: white;
+}
+
+#nav_text a {
+	color: white;
+}
+
+#nav2_text a {
+	color: black;
+}
+
+h3 {
+	position: absolute;
+	left: 45%;
+}
+
+#a, #b, #c {
+	position: absolute;
+	top: 10px;
+	width: 100%;
+}
+
+#small_img {
+	margin-top: 30px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#big_img2, #big_img3 {
+	display: none;
+}
+
+#big {
+	margin-right: 0px;
+	margin-left: 0px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello</title>
+</head>
+<body>
+	<fieldset>
+		<legend>GET</legend>
+		<form action="hi" method="GET">
+			<input type="text" name="get1" placeholder="Input here">
+			<input type="submit" value="Posting" />
+		</form>
+	</fieldset>
+
+	==============================<br>
+	{{get_val}}<br>
+	==============================<br>
+
+	<fieldset>
+		<legend>POST</legend>
+		<form action="hi" method="POST">
+			<input type="text" name="post1" placeholder="Input here">
+			<input type="submit" value="Posting" />
+		</form>
+	</fieldset>
+
+	==============================<br>
+	{{post_val1}}<br>
+	==============================<br>
+
+	<fieldset>
+		<legend>POST</legend>
+		<form action="hi" method="POST">
+			<input type="text" name="post2" placeholder="Input here">
+			<input type="submit" value="Posting" />
+		</form>
+	</fieldset>
+
+	==============================<br>
+	{{post_val2}}<br>
+	==============================<br>
+	
+</body>
+</html>

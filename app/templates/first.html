@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block body %}
+<div class="containter">
+	<fieldset>
+		<legend>Steal search engine</legend>
+		<form action="first" method="GET">
+			<input type="text" name="get" placeholder="Input keyword">
+			<input type="submit" name='google' value="Google">
+			<input type="submit" name='naver' value="Naver">
+			<input type="submit" name='daum' value="Daum">
+		</form>
+	</fieldset>
+</div>
+
+{% endblock %}
