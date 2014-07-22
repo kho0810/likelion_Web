@@ -1,0 +1,28 @@
+{% extends "head.html" %}
+{% block body %}
+<form action="{{ url_for('forth') }}" method='POST'>
+	{{ form.hidden_tag() }}
+
+	{{ form.genre.label }}
+	{{ form.genre }}
+
+	{{ form.submit }}
+</form>
+
+{% for message in form.genre.errors %}
+<div>{{message}}</div>
+{% endfor %}
+
+{% if arr %}
+<h2>Results of crawling</h2>
+{% for i in arr %}
+{{i}}<br>
+{% endfor %}
+{% endif %}
+
+{% if titles %}
+<h2>Titles</h2>
+{{titles}}
+{% endif %}
+
+{% endblock %}

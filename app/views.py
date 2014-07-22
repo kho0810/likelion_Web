@@ -4,7 +4,10 @@ import urllib2
 from bs4 import BeautifulSoup
 from flaskext import wtf
 from flaskext.wtf import Form, TextField, TextAreaField, \
-    SubmitField, validators, ValidationError
+    SubmitField, validators, ValidationError, IntegerField
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
 
 class ContactForm(Form):
@@ -103,6 +106,36 @@ def third():
         else:
             return "Nice to meet you, " + form.name.data + "!"
     return render_template('third.html', form=form)
+
+
+class NaverForm(Form):
+    genre = IntegerField(
+        "genre", [validators.Required("Please enter genre number.")])
+    submit = SubmitField("Send")
+
+
+@app.route('/forth', methods=['GET', 'POST'])
+def forth():
+    form = NaverForm()
+    if request.method == 'POST':
+        if not form.validate():
+            return render_template('forth.html', form=form)
+        else:
+            # crawl
+            url = "http://news.naver.com/main/list.nhn?mode=LSD&mid=sec&sid1=" + str(form.genre.data)
+            htmltext = urllib2.urlopen(url).read()
+            soup = BeautifulSoup(htmltext, from_encoding="utf-8")
+
+            arr = []
+
+            titles = soup.find_all('a', 'nclicks(fls.list)')
+            for tag in titles:
+                if len(tag.get_text()) != 0:
+                    arr.append(tag.get_text())
+            return render_template('forth.html', arr=arr, form=form, 
+                titles=titles)
+
+    return render_template('forth.html', form=form)
 
 
 @app.errorhandler(404)
