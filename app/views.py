@@ -127,13 +127,15 @@ def forth():
             soup = BeautifulSoup(htmltext, from_encoding="utf-8")
 
             arr = []
-
+            # arr1 = []
             titles = soup.find_all('a', 'nclicks(fls.list)')
             for tag in titles:
-                if len(tag.get_text()) != 0:
+                # arr1.append(len(tag.get_text()))
+                if len(tag.get_text()) > 2:
                     arr.append(tag.get_text())
-            return render_template('forth.html', arr=arr, form=form, 
-                titles=titles)
+
+            return render_template('forth.html', arr=arr[:10], form=form,
+                                   titles=titles)
 
     return render_template('forth.html', form=form)
 

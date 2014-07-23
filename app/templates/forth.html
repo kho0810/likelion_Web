@@ -13,6 +13,12 @@
 <div>{{message}}</div>
 {% endfor %}
 
+{% if arr1 %}
+{% for i in arr1 %}
+{{i}}<br>
+{% endfor %}
+{% endif %}
+
 {% if arr %}
 <h2>Results of crawling</h2>
 {% for i in arr %}
@@ -24,5 +30,6 @@
 <h2>Titles</h2>
 {{titles}}
 {% endif %}
+
 
 {% endblock %}
