@@ -1,0 +1,56 @@
+{% extends "head.html" %}
+{% block body %}
+<div class="container">
+	<div class="row">
+		<form action="{{url_for("tweet")}}" enctype="multipart/form-data" method="POST">
+			<input type="file" name="photo"><br>
+			<input type="text" name="comment"><br>
+			<input type="submit" value="submit">
+		</form><br>
+
+	</div>
+
+	<div class="row">
+		{% if tweetURLs %}
+		{% for tweet in tweetURLs %}
+		{% if tweet.url != '' %}
+		{% if tweet.comment != '' %}
+		
+			<img src="{{tweet.url}}"><br>
+		
+			<p>{{tweet.comment}}</p>
+		
+		
+
+		{% else %}
+		
+			<img src="{{tweet.url}}"><br>
+		
+			<p>There is no comment</p>
+		
+		
+
+		{% endif %}
+		{% else %}
+		{% if tweet.comment != '' %}
+		
+			<p>
+				No img<br>
+				{{tweet.comment}}
+			</p>
+		
+		{% else %}
+		
+
+		{% endif %}
+		{% endif %}
+		
+		{% endfor %}
+		{% endif %}
+
+
+
+	</div>
+
+</div>
+{% endblock %}

@@ -1,10 +1,12 @@
-from flask import render_template, Flask, request, redirect
+from flask import render_template, Flask, request, redirect, url_for, current_app
 from app import app
 import urllib2
 from bs4 import BeautifulSoup
 from flaskext import wtf
 from flaskext.wtf import Form, TextField, TextAreaField, \
     SubmitField, validators, ValidationError, IntegerField
+from google.appengine.ext import db
+import json
 import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
@@ -20,6 +22,25 @@ class ContactForm(Form):
     message = TextAreaField(
         "Message", [validators.Required("Please enter a subject.")])
     submit = SubmitField("Send")
+
+
+class Tweet(db.Model):
+    photo = db.BlobProperty()
+    comment = db.StringProperty()
+
+    def setPhoto(self, filestream):
+        self.photo = db.Blob(filestream)
+
+    def setExif(self, exif):
+        self.exif = json.dumps(exif)
+
+    def getExif(self):
+        return json.loads(self.exif)
+
+
+class TweetURL(object):
+    url = ''
+    comment = ''
 
 
 @app.route('/')
@@ -138,6 +159,38 @@ def forth():
                                    titles=titles)
 
     return render_template('forth.html', form=form)
+
+
+@app.route('/tweet', methods=['GET', 'POST'])
+def tweet():
+    if request.form:
+        upload_data = Tweet()
+
+        if request.files.get('photo'):
+            post_photo = request.files.get('photo')
+            filestream = post_photo.read()
+            upload_data.photo = db.Blob(filestream)
+            # print post_photo
+
+        post_comment = request.form.get('comment')
+        upload_data.comment = post_comment
+        upload_data.put()
+
+    tweetURLs = []
+    for tweet in Tweet.all():
+        tweetURL = TweetURL()
+        if tweet.photo:
+            tweetURL.url = url_for("show", key=tweet.key())
+        tweetURL.comment = tweet.comment
+        tweetURLs.append(tweetURL)
+
+    return render_template('tweet.html', tweetURLs=tweetURLs)
+
+
+@app.route('/show/<key>', methods=['GET'])
+def show(key):
+    uploaded_data = db.get(key)
+    return current_app.response_class(uploaded_data.photo)
 
 
 @app.errorhandler(404)
